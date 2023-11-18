@@ -1,201 +1,264 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-  margin: 0;
-  min-width: 250px;
-}
-
-/* Include the padding and border in an element's total width and height */
-* {
-  box-sizing: border-box;
-}
-
-/* Remove margins and padding from the list */
-ul {
-  margin: 0;
-  padding: 0;
-}
-
-/* Style the list items */
-ul li {
-  cursor: pointer;
-  position: relative;
-  padding: 12px 8px 12px 40px;
-  list-style-type: none;
-  background: #eee;
-  font-size: 18px;
-  transition: 0.2s;
-  
-  /* make the list items unselectable */
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Set all odd list items to a different color (zebra-stripes) */
-ul li:nth-child(odd) {
-  background: #f9f9f9;
-}
-
-/* Darker background-color on hover */
-ul li:hover {
-  background: #ddd;
-}
-
-/* When clicked on, add a background color and strike out text */
-ul li.checked {
-  background: #888;
-  color: #fff;
-  text-decoration: line-through;
-}
-
-/* Add a "checked" mark when clicked on */
-ul li.checked::before {
-  content: '';
-  position: absolute;
-  border-color: #fff;
-  border-style: solid;
-  border-width: 0 2px 2px 0;
-  top: 10px;
-  left: 16px;
-  transform: rotate(45deg);
-  height: 15px;
-  width: 7px;
-}
-
-/* Style the close button */
-.close {
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 12px 16px 12px 16px;
-}
-
-.close:hover {
-  background-color: rgb(75, 1, 75);
-  color: white;
-}
-
-/* Style the header */
-.header {
-  background-color: rgb(75, 1, 75);
-  padding: 30px 40px;
-  color: white;
-  text-align: center;
-}
-
-/* Clear floats after the header */
-.header:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Style the input */
-input {
-  margin: 0;
-  border: none;
-  border-radius: 0;
-  width: 75%;
-  padding: 10px;
-  float: left;
-  font-size: 16px;
-}
-
-/* Style the "Add" button */
-.addBtn {
-  padding: 10px;
-  width: 25%;
-  background: rgb(165, 65, 165);
-  color:black;
-  float: left;
-  text-align: center;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-  border-radius: 0;
-}
-
-.addBtn:hover {
-  background-color: #bbb;
-}
-</style>
-</head>
-<body>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap">
   <style>
-    h2{
+    body {
+      margin: 0;
+      min-width: 250px;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #3494E6, #EC6EAD);
+      color: #333;
+      text-align: center;
+      overflow: auto; /* Updated property for scrolling */
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    .header {
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 30px 20px; /* Adjusted padding for smaller screens */
+      color: #333;
+      text-align: center;
+    }
+
+    .header:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    input {
+      margin: 0;
+      border: none;
+      border-radius: 5px;
+      width: 100%; /* Full width on smaller screens */
+      padding: 12px;
+      font-size: 16px;
+      color: #333;
+      background-color: rgba(255, 255, 255, 0.7);
+      border: 1px solid #fff;
+    }
+
+    .addBtn {
+      padding: 12px;
+      width: 30%;
+      background: #FF6B6B;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+      border-radius: 5px;
+      border: none;
+      margin-left: 5px;
+      float: right; /* Keep the button on the right side */
+    }
+
+    .addBtn:hover {
+      background-color: #FF5252;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+
+    ul li {
+      cursor: pointer;
+      position: relative;
+      padding: 16px;
+      list-style-type: none;
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 18px;
+      transition: 0.3s;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 12px;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    ul li:nth-child(odd) {
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    ul li:hover {
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    ul li.checked {
+      background: #A9A9A9;
+      color: #fff;
+      text-decoration: line-through;
+    }
+
+    ul li.checked::before {
+      content: '\2713';
+      position: absolute;
+      top: 50%;
+      left: 10px; /* Adjust the left property */
+      color: #fff;
+      font-size: 24px;
+      transform: translateY(-50%);
+    }
+
+    .close {
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 16px;
+      cursor: pointer;
+      color: #FF6B6B;
+    }
+
+    .close:hover {
+      color: #FF5252;
+    }
+
+    /* Tutorial Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding-top: 60px;
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    .close-modal {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close-modal:hover,
+    .close-modal:focus {
       color: black;
+      text-decoration: none;
+      cursor: pointer;
     }
   </style>
+</head>
+<body>
 
+<!-- Tutorial Modal -->
+<div id="tutorialModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <h2>Welcome to the To-Do List Tutorial!</h2>
+    <p>This simple to-do list allows you to:</p>
+    <ul>
+      <li>Add tasks by typing in the input field and clicking "Add".</li>
+      <li>Mark tasks as completed by clicking on them.</li>
+      <li>Remove tasks by clicking the 'x' button.</li>
+      <li>Press Enter to quickly add a task.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Existing HTML content -->
 <div id="myDIV" class="header">
   <h2 style="margin:5px">My To Do List</h2>
-  <input type="text" id="myInput" placeholder="Title...">
+  <input type="text" id="myInput" placeholder="Title..." onkeypress="handleKeyPress(event)">
   <span onclick="newElement()" class="addBtn">Add</span>
 </div>
 
 <ul id="myUL"></ul>
 
 <script>
-// Create a "close" button and append it to each list item
-var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  myNodelist[i].appendChild(span);
-}
+  // Check if the user is visiting the site for the first time
+  var visitedBefore = localStorage.getItem('visitedBefore');
+  if (!visitedBefore) {
+    // Display the tutorial for first-time users
+    displayTutorial();
 
-// Click on a close button to hide the current list item
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
+    // Mark that the user has visited
+    localStorage.setItem('visitedBefore', true);
   }
-}
 
-// Add a "checked" symbol when clicking on a list item
-var list = document.querySelector('ul');
-list.addEventListener('click', function(ev) {
-  if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
-  }
-}, false);
+  // Function to add a new task
+  function newElement() {
+    var li = document.createElement("li");
+    var inputValue = document.getElementById("myInput").value;
+    var t = document.createTextNode(inputValue);
+    li.appendChild(t);
+    if (inputValue === '') {
+      alert("You must write something!");
+    } else {
+      document.getElementById("myUL").appendChild(li);
+    }
+    document.getElementById("myInput").value = "";
 
-// Create a new list item when clicking on the "Add" button
-function newElement() {
-  var li = document.createElement("li");
-  var inputValue = document.getElementById("myInput").value;
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === '') {
-    alert("You must write something!");
-  } else {
-    document.getElementById("myUL").appendChild(li);
-  }
-  document.getElementById("myInput").value = "";
+    var span = document.createElement("SPAN");
+    var txt = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(txt);
+    li.appendChild(span);
 
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
-
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
+    // Add event listener for removing the task
+    span.onclick = function() {
       var div = this.parentElement;
       div.style.display = "none";
+    };
+
+    // Add event listener for marking the task as completed
+    li.onclick = function() {
+      this.classList.toggle("checked");
+    };
+  }
+
+  // Function to handle Enter key press
+  function handleKeyPress(event) {
+    if (event.keyCode === 13) {
+      newElement();
     }
   }
-}
+
+  // Function to display the tutorial modal
+  function displayTutorial() {
+    var modal = document.getElementById('tutorialModal');
+    modal.style.display = 'block';
+  }
+
+  // Function to close the tutorial modal
+  function closeModal() {
+    var modal = document.getElementById('tutorialModal');
+    modal.style.display = 'none';
+  }
 </script>
 
 </body>
