@@ -46,4 +46,4 @@ Contributions are welcome! If you'd like to contribute to the project, please fo
 ## License
 This project is licensed under the MIT License.
 
-© 2023 AYAN CHOWDHURY. All rights reserved.
+© 2023-24 AYAN CHOWDHURY. All rights reserved.
